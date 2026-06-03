@@ -1,12 +1,15 @@
 import type { Pokemon, PokemonDetail } from "@atlanticcity/domain";
 import { normalizePokemonName } from "@atlanticcity/utils";
 import { pokeApiClient } from "../http/poke-api-client";
-import { mapNamedResourceToPokemon, mapPokemonDetail } from "./mappers";
+import {
+  adaptNamedResourceToPokemon,
+  adaptPokemonDetailResponse
+} from "./adapters";
 import type {
   PokeApiPokemonDetailResponse,
   PokeApiPokemonListResponse,
   PokeApiTypeResponse
-} from "./types";
+} from "./responses";
 
 export const pokeApiRepository = {
   async getPokemonByType(type: string): Promise<Pokemon[]> {
@@ -15,7 +18,7 @@ export const pokeApiRepository = {
     );
 
     return data.pokemon.map(({ pokemon }) =>
-      mapNamedResourceToPokemon(pokemon, [{ name: data.name }])
+      adaptNamedResourceToPokemon(pokemon, [{ name: data.name }])
     );
   },
 
@@ -24,7 +27,7 @@ export const pokeApiRepository = {
       `/pokemon/${normalizePokemonName(name)}`
     );
 
-    return mapPokemonDetail(data);
+    return adaptPokemonDetailResponse(data);
   },
 
   async getPokemonList(limit = 30, offset = 0): Promise<Pokemon[]> {
@@ -33,6 +36,6 @@ export const pokeApiRepository = {
       { params: { limit, offset } }
     );
 
-    return data.results.map((pokemon) => mapNamedResourceToPokemon(pokemon));
+    return data.results.map((pokemon) => adaptNamedResourceToPokemon(pokemon));
   }
 };

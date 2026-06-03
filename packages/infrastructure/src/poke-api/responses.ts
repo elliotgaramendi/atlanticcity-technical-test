@@ -1,4 +1,4 @@
-export interface PokeApiNamedResource {
+export interface PokeApiNamedResourceResponse {
   name: string;
   url: string;
 }
@@ -7,21 +7,21 @@ export interface PokeApiPokemonListResponse {
   count: number;
   next: string | null;
   previous: string | null;
-  results: PokeApiNamedResource[];
+  results: PokeApiNamedResourceResponse[];
 }
 
 export interface PokeApiTypeResponse {
   id: number;
   name: string;
   pokemon: Array<{
-    pokemon: PokeApiNamedResource;
+    pokemon: PokeApiNamedResourceResponse;
     slot: number;
   }>;
 }
 
 export interface PokeApiPokemonDetailResponse {
   abilities: Array<{
-    ability: PokeApiNamedResource | null;
+    ability: PokeApiNamedResourceResponse | null;
     is_hidden: boolean;
     slot: number;
   }>;
@@ -40,11 +40,11 @@ export interface PokeApiPokemonDetailResponse {
   stats: Array<{
     base_stat: number;
     effort: number;
-    stat: PokeApiNamedResource;
+    stat: PokeApiNamedResourceResponse;
   }>;
   types: Array<{
     slot: number;
-    type: PokeApiNamedResource;
+    type: PokeApiNamedResourceResponse;
   }>;
   weight: number;
 }

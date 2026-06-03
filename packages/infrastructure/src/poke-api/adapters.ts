@@ -1,51 +1,51 @@
 import type { Pokemon, PokemonDetail } from "@atlanticcity/domain";
 import { getPokemonImage } from "@atlanticcity/utils";
 import type {
-  PokeApiNamedResource,
+  PokeApiNamedResourceResponse,
   PokeApiPokemonDetailResponse
-} from "./types";
+} from "./responses";
 
-export function mapNamedResourceToPokemon(
-  resource: PokeApiNamedResource,
+export function adaptNamedResourceToPokemon(
+  response: PokeApiNamedResourceResponse,
   types: Pokemon["types"] = []
 ): Pokemon {
-  const id = getPokemonIdFromUrl(resource.url);
+  const id = getPokemonIdFromUrl(response.url);
 
   return {
     id,
     imageUrl: getPokemonImage(id),
-    name: resource.name,
+    name: response.name,
     types
   };
 }
 
-export function mapPokemonDetail(
-  data: PokeApiPokemonDetailResponse
+export function adaptPokemonDetailResponse(
+  response: PokeApiPokemonDetailResponse
 ): PokemonDetail {
   const imageUrl =
-    data.sprites.other?.["official-artwork"]?.front_default ??
-    data.sprites.front_default ??
-    getPokemonImage(data.id);
+    response.sprites.other?.["official-artwork"]?.front_default ??
+    response.sprites.front_default ??
+    getPokemonImage(response.id);
 
   return {
-    abilities: data.abilities
+    abilities: response.abilities
       .map(({ ability }) => ability?.name)
       .filter((name): name is string => Boolean(name)),
-    baseExperience: data.base_experience,
-    height: data.height,
-    id: data.id,
+    baseExperience: response.base_experience,
+    height: response.height,
+    id: response.id,
     imageUrl,
-    name: data.name,
-    stats: data.stats.map((stat) => ({
+    name: response.name,
+    stats: response.stats.map((stat) => ({
       baseStat: stat.base_stat,
       effort: stat.effort,
       name: stat.stat.name
     })),
-    types: data.types.map((type) => ({
+    types: response.types.map((type) => ({
       name: type.type.name,
       slot: type.slot
     })),
-    weight: data.weight
+    weight: response.weight
   };
 }
 
