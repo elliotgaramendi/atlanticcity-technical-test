@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@atlanticcity/config": "workspace:*",
+    "@atlanticcity/domain": "workspace:*",
     "@atlanticcity/ui": "workspace:*",
     "lucide-react": "latest",
     "react": "latest",

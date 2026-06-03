@@ -1,15 +1,27 @@
 import { workspaceApps } from "@atlanticcity/config";
+import { AppToastProvider } from "@atlanticcity/ui";
+import type { ThemeMode } from "@atlanticcity/domain";
 import { Boxes, MonitorDot } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { RemoteSlot } from "./components/RemoteSlot";
+import { UiShowcase } from "./components/UiShowcase";
 import { shellRemotes } from "./remotes";
 
 const app = workspaceApps.shell;
 
 export function App() {
+  const [mode, setMode] = useState<ThemeMode>("dark");
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", mode === "dark");
+  }, [mode]);
+
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-50">
-      <section className="mx-auto flex max-w-6xl flex-col px-6 py-12">
+    <>
+      <UiShowcase mode={mode} onModeChange={setMode} />
+      <main className="min-h-screen bg-background text-foreground">
+      <section className="mx-auto flex max-w-7xl flex-col px-5 py-10 sm:px-8">
         <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-lg border border-blue-300/30 bg-blue-400/10 text-blue-200">
           <Boxes aria-hidden="true" size={28} />
         </div>
@@ -35,5 +47,7 @@ export function App() {
         </section>
       </section>
     </main>
+      <AppToastProvider />
+    </>
   );
 }
