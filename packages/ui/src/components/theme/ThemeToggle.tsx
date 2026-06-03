@@ -18,6 +18,7 @@ export function ThemeToggle({ mode, onModeChange }: ThemeToggleProps) {
       size="icon"
       variant="outline"
     >
+      <span className="sr-only">Cambiar a tema {nextMode}</span>
       {mode === "dark" ? (
         <Sun aria-hidden="true" size={18} />
       ) : (

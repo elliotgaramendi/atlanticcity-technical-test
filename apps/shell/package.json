@@ -11,9 +11,11 @@
   "dependencies": {
     "@atlanticcity/config": "workspace:*",
     "@atlanticcity/domain": "workspace:*",
+    "@atlanticcity/infrastructure": "workspace:*",
     "@atlanticcity/ui": "workspace:*",
     "lucide-react": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-router-dom": "^7.16.0"
   }
 }
