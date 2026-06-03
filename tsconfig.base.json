@@ -17,6 +17,7 @@
     "jsx": "react-jsx",
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
+    "ignoreDeprecations": "5.0",
     "baseUrl": ".",
     "paths": {
       "@atlanticcity/application": ["packages/application/src/index.ts"],
