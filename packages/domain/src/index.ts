@@ -1,8 +1,42 @@
 export type PokemonId = number;
 export type PokemonName = string;
+export type ThemeMode = "dark" | "light";
 
-export interface PokemonSummary {
+export interface PokemonType {
+  name: string;
+  slot?: number;
+}
+
+export interface PokemonStat {
+  baseStat: number;
+  effort: number;
+  name: string;
+}
+
+export interface Pokemon {
   id: PokemonId;
-  name: PokemonName;
   imageUrl: string;
+  name: PokemonName;
+  types: PokemonType[];
+}
+
+export interface PokemonDetail extends Pokemon {
+  abilities: string[];
+  baseExperience: number;
+  height: number;
+  stats: PokemonStat[];
+  weight: number;
+}
+
+export interface PokemonHistoryItem {
+  id: PokemonId;
+  imageUrl: string;
+  name: PokemonName;
+  visitedAt: string;
+}
+
+export interface UserSession {
+  dismissedLastVisitedToastAt?: string;
+  id: string;
+  lastVisitedPokemonName?: PokemonName;
 }

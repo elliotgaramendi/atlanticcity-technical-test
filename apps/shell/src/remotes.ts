@@ -1,4 +1,4 @@
-import { workspaceApps } from "@atlanticcity/config";
+import { shellRemoteConfigs } from "@atlanticcity/config";
 import type { ComponentType } from "react";
 
 export interface ShellRemote {
@@ -8,21 +8,12 @@ export interface ShellRemote {
   remoteUrl: string;
 }
 
-export const shellRemotes: ShellRemote[] = [
-  {
-    id: "pokemon-detail",
-    load: () => import("pokemonDetail/App"),
-    name: workspaceApps.detail.name,
-    remoteUrl:
-      import.meta.env.VITE_POKEMON_DETAIL_REMOTE_URL ??
-      "http://localhost:3001/remoteEntry.js"
-  },
-  {
-    id: "pokemon-history",
-    load: () => import("pokemonHistory/App"),
-    name: workspaceApps.history.name,
-    remoteUrl:
-      import.meta.env.VITE_POKEMON_HISTORY_REMOTE_URL ??
-      "http://localhost:3002/remoteEntry.js"
-  }
-];
+const remoteLoaders = {
+  "pokemon-detail": () => import("pokemonDetail/App"),
+  "pokemon-history": () => import("pokemonHistory/App")
+} satisfies Record<ShellRemote["id"], ShellRemote["load"]>;
+
+export const shellRemotes: ShellRemote[] = shellRemoteConfigs.map((remote) => ({
+  ...remote,
+  load: remoteLoaders[remote.id]
+}));
