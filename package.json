@@ -41,6 +41,7 @@
     "npm-run-all": "latest",
     "postcss": "latest",
     "tailwindcss": "3.4.17",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.9.3",
     "typescript-eslint": "latest",
     "vite": "latest"
