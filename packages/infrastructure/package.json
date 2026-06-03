@@ -9,5 +9,11 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "lint": "eslint ."
+  },
+  "dependencies": {
+    "@atlanticcity/config": "workspace:*",
+    "@atlanticcity/domain": "workspace:*",
+    "@atlanticcity/utils": "workspace:*",
+    "axios": "latest"
   }
 }

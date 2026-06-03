@@ -8,5 +8,10 @@
     "declarationMap": true,
     "outDir": "dist"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    { "path": "../config" },
+    { "path": "../domain" },
+    { "path": "../utils" }
+  ]
 }
