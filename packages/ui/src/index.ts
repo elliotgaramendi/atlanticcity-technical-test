@@ -1,2 +1,2 @@
 export { cn } from "./lib/utils";
-export { Skeleton } from "./components";
+export * from "./components";
