@@ -1,5 +1,6 @@
 node_modules
 .pnpm-store
+.mf
 dist
 .DS_Store
 *.local
