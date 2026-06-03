@@ -6,7 +6,15 @@
     "emitDeclarationOnly": true,
     "declaration": true,
     "declarationMap": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "paths": {
+      "components": ["./src/components/index.ts"],
+      "hooks": ["./src/hooks/index.ts"],
+      "lib": ["./src/lib"],
+      "src/*": ["./src/*"],
+      "ui": ["./src/components/ui/index.ts"],
+      "utils": ["./src/lib/utils.ts"]
+    }
   },
   "include": ["src"]
 }

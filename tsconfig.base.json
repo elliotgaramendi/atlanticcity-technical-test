@@ -24,17 +24,8 @@
       "@atlanticcity/infrastructure": ["./packages/infrastructure/src/index.ts"],
       "@atlanticcity/ui": ["./packages/ui/src/index.ts"],
       "@atlanticcity/ui/components": ["./packages/ui/src/components/index.ts"],
-      "@atlanticcity/ui/components/ui": ["./packages/ui/src/components/ui/index.ts"],
-      "@atlanticcity/ui/hooks": ["./packages/ui/src/hooks/index.ts"],
-      "@atlanticcity/ui/lib": ["./packages/ui/src/lib"],
       "@atlanticcity/ui/lib/utils": ["./packages/ui/src/lib/utils.ts"],
-      "@atlanticcity/utils": ["./packages/utils/src/index.ts"],
-      "components": ["./packages/ui/src/components/index.ts"],
-      "hooks": ["./packages/ui/src/hooks/index.ts"],
-      "lib": ["./packages/ui/src/lib"],
-      "src/*": ["./packages/ui/src/*"],
-      "ui": ["./packages/ui/src/components/ui/index.ts"],
-      "utils": ["./packages/ui/src/lib/utils.ts"]
+      "@atlanticcity/utils": ["./packages/utils/src/index.ts"]
     }
   }
 }
