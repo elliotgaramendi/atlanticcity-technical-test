@@ -1,4 +1,4 @@
-import type { ThemeMode } from "@atlanticcity/domain";
+import type { ThemeMode, UserSession } from "@atlanticcity/domain";
 import {
   AppButton,
   Avatar,
@@ -9,17 +9,25 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  ThemeToggle
+  ThemeToggle,
+  showAppToast
 } from "@atlanticcity/ui";
 import { LogOut, User } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 interface ShellHeaderProps {
   mode: ThemeMode;
+  onLogout: () => void;
   onModeChange: (mode: ThemeMode) => void;
+  session: UserSession | null;
 }
 
-export function ShellHeader({ mode, onModeChange }: ShellHeaderProps) {
+export function ShellHeader({
+  mode,
+  onLogout,
+  onModeChange,
+  session
+}: ShellHeaderProps) {
   return (
     <header className="sticky top-0 z-30 border-b border-border/70 bg-background/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
@@ -44,7 +52,7 @@ export function ShellHeader({ mode, onModeChange }: ShellHeaderProps) {
 
         <div className="flex items-center gap-2">
           <ThemeToggle mode={mode} onModeChange={onModeChange} />
-          <UserMenu />
+          <UserMenu onLogout={onLogout} session={session} />
         </div>
       </div>
     </header>
@@ -69,7 +77,23 @@ function HeaderNavLink({ label, to }: { label: string; to: string }) {
   );
 }
 
-function UserMenu() {
+function UserMenu({
+  onLogout,
+  session
+}: {
+  onLogout: () => void;
+  session: UserSession | null;
+}) {
+  const navigate = useNavigate();
+  const label = session?.displayName ?? "Explorador";
+  const email = session?.email ?? "trainer@atlanticcity.dev";
+
+  function handleLogout() {
+    onLogout();
+    showAppToast.info("Sesion cerrada", "Tu credencial local fue eliminada.");
+    navigate("/login", { replace: true });
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -83,16 +107,21 @@ function UserMenu() {
               <User aria-hidden="true" size={16} />
             </AvatarFallback>
           </Avatar>
-          <span className="hidden sm:inline">Iniciar sesion</span>
+          <span className="hidden sm:inline">{label}</span>
         </AppButton>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
         className="w-56 rounded-2xl border-sky-200/70 bg-white/95 p-2 shadow-xl shadow-sky-950/10 dark:border-sky-400/15 dark:bg-slate-950/95"
       >
-        <DropdownMenuLabel>Explorador invitado</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          <span className="block">{label}</span>
+          <span className="block text-xs font-normal text-muted-foreground">
+            {email}
+          </span>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="rounded-xl">
+        <DropdownMenuItem className="rounded-xl" onClick={handleLogout}>
           <LogOut aria-hidden="true" size={16} />
           Cerrar sesion
         </DropdownMenuItem>

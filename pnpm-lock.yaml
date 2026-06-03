@@ -150,6 +150,9 @@ importers:
       '@atlanticcity/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@hookform/resolvers':
+        specifier: ^5.4.0
+        version: 5.4.0(react-hook-form@7.77.0(react@19.2.7))
       lucide-react:
         specifier: latest
         version: 1.17.0(react@19.2.7)
@@ -159,9 +162,18 @@ importers:
       react-dom:
         specifier: latest
         version: 19.2.7(react@19.2.7)
+      react-hook-form:
+        specifier: ^7.77.0
+        version: 7.77.0(react@19.2.7)
       react-router-dom:
         specifier: ^7.16.0
         version: 7.16.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
+      zustand:
+        specifier: ^5.0.14
+        version: 5.0.14(@types/react@19.2.16)(react@19.2.7)(use-sync-external-store@1.6.0(react@19.2.7))
 
   packages/application:
     dependencies:
@@ -367,6 +379,11 @@ packages:
 
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
+
+  '@hookform/resolvers@5.4.0':
+    resolution: {integrity: sha512-EIsqr/t/qbinPIhGjMdtvutIN1Kk4uwbROE9/UQ93CAVGR7GkA7Y92+fX80OzXi/OB67jVFYwKGO1WzkxmkFZw==}
+    peerDependencies:
+      react-hook-form: ^7.55.0
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -937,6 +954,9 @@ packages:
 
   '@rolldown/pluginutils@1.0.1':
     resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
+
+  '@standard-schema/utils@0.3.0':
+    resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
 
   '@tanstack/query-core@5.101.0':
     resolution: {integrity: sha512-cQetA74EB+seWySv1TTKr828TnP0u39m6LykwDXIo84SNortpDkp30TMEjkqtYCNP9c40uT/iwl6MLiufEt0Ow==}
@@ -2741,6 +2761,11 @@ snapshots:
 
   '@floating-ui/utils@0.2.11': {}
 
+  '@hookform/resolvers@5.4.0(react-hook-form@7.77.0(react@19.2.7))':
+    dependencies:
+      '@standard-schema/utils': 0.3.0
+      react-hook-form: 7.77.0(react@19.2.7)
+
   '@humanfs/core@0.19.2':
     dependencies:
       '@humanfs/types': 0.15.0
@@ -3254,6 +3279,8 @@ snapshots:
       vite: 8.0.16(@types/node@25.9.1)(jiti@1.21.7)(yaml@2.9.0)
 
   '@rolldown/pluginutils@1.0.1': {}
+
+  '@standard-schema/utils@0.3.0': {}
 
   '@tanstack/query-core@5.101.0': {}
 

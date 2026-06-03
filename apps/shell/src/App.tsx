@@ -1,27 +1,45 @@
-import type { ThemeMode } from "@atlanticcity/domain";
-import { localStorageThemeRepository } from "@atlanticcity/infrastructure";
 import { AppToastProvider } from "@atlanticcity/ui";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 
-import { UiShowcase } from "./components/UiShowcase";
+import { AuthenticatedLayout } from "./components/layout/AuthenticatedLayout";
+import { LoginPage } from "./features/auth/LoginPage";
+import { HistoryPage } from "./features/history/HistoryPage";
+import { HomePage } from "./features/home/HomePage";
+import { GuestRoute } from "./routes/GuestRoute";
+import { ProtectedRoute } from "./routes/ProtectedRoute";
+import { useThemeStore } from "./stores";
 
 export function App() {
-  const [mode, setMode] = useState<ThemeMode>(
-    () => localStorageThemeRepository.get() ?? "dark"
-  );
+  const mode = useThemeStore((state) => state.mode);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", mode === "dark");
   }, [mode]);
 
-  function handleModeChange(nextMode: ThemeMode) {
-    setMode(nextMode);
-    localStorageThemeRepository.save(nextMode);
-  }
-
   return (
     <>
-      <UiShowcase mode={mode} onModeChange={handleModeChange} />
+      <Routes>
+        <Route
+          element={
+            <GuestRoute>
+              <LoginPage />
+            </GuestRoute>
+          }
+          path="/login"
+        />
+        <Route
+          element={
+            <ProtectedRoute>
+              <AuthenticatedLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route element={<HomePage />} index />
+          <Route element={<HistoryPage />} path="/history" />
+        </Route>
+        <Route element={<Navigate replace to="/" />} path="*" />
+      </Routes>
       <AppToastProvider />
     </>
   );

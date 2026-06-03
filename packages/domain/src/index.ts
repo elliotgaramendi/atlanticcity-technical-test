@@ -36,7 +36,10 @@ export interface PokemonHistoryItem {
 }
 
 export interface UserSession {
+  authenticatedAt?: string;
   dismissedLastVisitedToastAt?: string;
+  displayName?: string;
+  email?: string;
   id: string;
   lastVisitedPokemonName?: PokemonName;
 }
