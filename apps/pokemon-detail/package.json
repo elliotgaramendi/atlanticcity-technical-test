@@ -1,0 +1,18 @@
+{
+  "name": "@atlanticcity/pokemon-detail",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 3001 --strictPort",
+    "build": "tsc -p tsconfig.json && vite build",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@atlanticcity/config": "workspace:*",
+    "@atlanticcity/ui": "workspace:*",
+    "lucide-react": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "atlanticcity-technical-test",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.12.1",
+  "scripts": {
+    "dev": "run-p dev:shell dev:detail dev:history",
+    "dev:shell": "pnpm --filter @atlanticcity/shell dev",
+    "dev:detail": "pnpm --filter @atlanticcity/pokemon-detail dev",
+    "dev:history": "pnpm --filter @atlanticcity/pokemon-history dev",
+    "build": "pnpm -r --sort build",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@module-federation/vite": "latest",
+    "@tanstack/react-query": "latest",
+    "axios": "latest",
+    "lucide-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-hook-form": "latest",
+    "react-router-dom": "latest",
+    "zod": "latest",
+    "zustand": "latest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@eslint/js": "latest",
+    "@rolldown/plugin-babel": "^0.2.3",
+    "@types/babel__core": "^7.20.5",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "latest",
+    "autoprefixer": "latest",
+    "babel-plugin-react-compiler": "latest",
+    "eslint": "latest",
+    "eslint-plugin-react-hooks": "latest",
+    "eslint-plugin-react-refresh": "latest",
+    "npm-run-all": "latest",
+    "postcss": "latest",
+    "tailwindcss": "3.4.17",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "latest",
+    "vite": "latest"
+  }
+}

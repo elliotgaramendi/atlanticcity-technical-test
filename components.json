@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "apps/shell/tailwind.config.ts",
+    "css": "apps/shell/src/styles.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@atlanticcity/ui/components",
+    "utils": "@atlanticcity/ui/lib/utils",
+    "ui": "@atlanticcity/ui/components",
+    "lib": "@atlanticcity/ui/lib",
+    "hooks": "@atlanticcity/ui/hooks"
+  },
+  "iconLibrary": "lucide"
+}

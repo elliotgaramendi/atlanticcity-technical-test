@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "baseUrl": ".",
+    "paths": {
+      "@atlanticcity/application": ["packages/application/src/index.ts"],
+      "@atlanticcity/config": ["packages/config/src/index.ts"],
+      "@atlanticcity/domain": ["packages/domain/src/index.ts"],
+      "@atlanticcity/infrastructure": ["packages/infrastructure/src/index.ts"],
+      "@atlanticcity/ui": ["packages/ui/src/index.ts"],
+      "@atlanticcity/utils": ["packages/utils/src/index.ts"]
+    }
+  }
+}
