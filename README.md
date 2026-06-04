@@ -83,6 +83,9 @@ pnpm dev:detail
 pnpm dev:history
 pnpm build
 pnpm lint
+pnpm test
+pnpm test:watch
+pnpm check
 ```
 
 Detalle:
@@ -93,6 +96,9 @@ Detalle:
 - `pnpm dev:history`: levanta Pokemon History en `http://localhost:3002`.
 - `pnpm build`: compila todos los packages y apps.
 - `pnpm lint`: ejecuta ESLint en el workspace.
+- `pnpm test`: ejecuta tests unitarios con Vitest.
+- `pnpm test:watch`: ejecuta Vitest en modo watch.
+- `pnpm check`: ejecuta `lint`, `test` y `build`.
 
 ## Puertos
 
@@ -337,6 +343,51 @@ Cada build copia `public/_redirects` al `dist` para soportar refresh en rutas SP
 - La cache de TanStack Query no es persistente.
 - Los MFEs se despliegan como tres sitios estaticos separados.
 - Las URLs de remotos se resuelven por variables de entorno en build-time.
+
+## Tests Y Verificacion
+
+Suite automatizada:
+
+```bash
+pnpm lint
+pnpm test
+pnpm build
+```
+
+La suite cubre logica pura y casos de uso sin depender de red, React, browser
+real ni LocalStorage real:
+
+- `packages/utils`: normalizacion de nombres, formato de ID, seleccion de imagen
+  y storage keys.
+- `packages/application`: guardado de visitas, incremento de contador, dedupe,
+  limpieza de historial, ultimo visitado y dismiss del toast.
+
+Checklist manual end-to-end:
+
+- Login con `aketchum@atlanticcity.dev` / `Atlantic2026`.
+- Reload mantiene sesion.
+- Logout limpia sesion.
+- Theme light/dark persiste.
+- Home muestra categorias reales.
+- Busqueda fullscreen carga 30 iniciales.
+- Infinite scroll carga paginas adicionales.
+- Busqueda exacta muestra solo el Pokemon solicitado.
+- Estado “No encontrado” aparece para nombres inexistentes.
+- Detail remoto abre desde Home y Search.
+- History remoto muestra visitas y permite limpiar historial.
+- Toast de ultimo visitado aparece en Home/History si existe historial.
+- Detail y History standalone cargan en `3001` y `3002`.
+- Shell muestra fallback si un remoto no esta disponible.
+
+La integracion real con PokeAPI se valida manualmente para evitar tests fragiles
+dependientes de red externa:
+
+- Home: `GET /type/{type}` para categorias reales.
+- Buscador: `GET /pokemon?limit=30&offset=0` e infinite scroll con
+  `offset += 30`.
+- Busqueda exacta: `GET /pokemon/{name}` con nombre normalizado.
+- Detail: `GET /pokemon/{name | id}` y render de imagen preferentemente SVG
+  cuando esta disponible.
 
 ## Mejoras Futuras
 

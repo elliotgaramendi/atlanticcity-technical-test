@@ -10,7 +10,10 @@
     "dev:detail": "pnpm --filter @atlanticcity/pokemon-detail dev",
     "dev:history": "pnpm --filter @atlanticcity/pokemon-history dev",
     "build": "pnpm -r --sort build",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "pnpm lint && pnpm test && pnpm build"
   },
   "dependencies": {
     "@module-federation/vite": "latest",
@@ -44,6 +47,7 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.9.3",
     "typescript-eslint": "latest",
-    "vite": "latest"
+    "vite": "latest",
+    "vitest": "^4.1.8"
   }
 }
