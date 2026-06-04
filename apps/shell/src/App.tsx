@@ -1,8 +1,8 @@
-import { AppToastProvider } from "@atlanticcity/ui";
 import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import { AuthenticatedLayout } from "./components/layout/AuthenticatedLayout";
+import { ShellProviders } from "./components/providers/ShellProviders";
 import { LoginPage } from "./features/auth/LoginPage";
 import { HistoryPage } from "./features/history/HistoryPage";
 import { HomePage } from "./features/home/HomePage";
@@ -18,7 +18,7 @@ export function App() {
   }, [mode]);
 
   return (
-    <>
+    <ShellProviders>
       <Routes>
         <Route
           element={
@@ -40,7 +40,6 @@ export function App() {
         </Route>
         <Route element={<Navigate replace to="/" />} path="*" />
       </Routes>
-      <AppToastProvider />
-    </>
+    </ShellProviders>
   );
 }

@@ -1,15 +1,21 @@
 import type { Pokemon } from "@atlanticcity/domain";
-import { AppButton, AppCard, AppDialog, AppInput, showAppToast } from "@atlanticcity/ui";
+import { AppButton, AppCard, AppDialog, AppInput, EmptyState } from "@atlanticcity/ui";
 import { Search, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 interface SearchDialogProps {
   onOpenChange: (open: boolean) => void;
+  onPokemonSelect: (pokemon: Pokemon) => void;
   open: boolean;
   pokemon: Pokemon[];
 }
 
-export function SearchDialog({ onOpenChange, open, pokemon }: SearchDialogProps) {
+export function SearchDialog({
+  onOpenChange,
+  onPokemonSelect,
+  open,
+  pokemon
+}: SearchDialogProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
 
@@ -32,11 +38,8 @@ export function SearchDialog({ onOpenChange, open, pokemon }: SearchDialogProps)
     });
   }, [pokemon, query]);
 
-  function handleSelect(pokemonName: string) {
-    showAppToast.success(
-      "Pokemon seleccionado",
-      `${pokemonName} quedo listo para abrir su ficha.`
-    );
+  function handleSelect(pokemon: Pokemon) {
+    onPokemonSelect(pokemon);
     onOpenChange(false);
   }
 
@@ -86,30 +89,38 @@ export function SearchDialog({ onOpenChange, open, pokemon }: SearchDialogProps)
           Escribe un nombre o numero. {results.length} resultados
         </p>
 
-        <div className="mt-7 grid gap-4 sm:grid-cols-2">
-          {results.map((item) => (
-            <button
-              className="text-left"
-              key={item.id}
-              onClick={() => handleSelect(item.name)}
-              type="button"
-            >
-              <AppCard className="flex items-center gap-4 rounded-3xl p-4 transition-all duration-300 hover:-translate-y-1 hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/10">
-                <img
-                  alt={item.name}
-                  className="h-16 w-16 rounded-2xl bg-sky-100 object-contain p-2 dark:bg-sky-400/10"
-                  src={item.imageUrl}
-                />
-                <div>
-                  <p className="font-mono text-xs text-muted-foreground">
-                    #{String(item.id).padStart(3, "0")}
-                  </p>
-                  <p className="mt-1 font-semibold">{item.name}</p>
-                </div>
-              </AppCard>
-            </button>
-          ))}
-        </div>
+        {results.length === 0 ? (
+          <EmptyState
+            className="mt-7"
+            description="No hay coincidencias entre las categorias cargadas."
+            title="Sin resultados"
+          />
+        ) : (
+          <div className="mt-7 grid gap-4 sm:grid-cols-2">
+            {results.map((item) => (
+              <button
+                className="text-left"
+                key={item.id}
+                onClick={() => handleSelect(item)}
+                type="button"
+              >
+                <AppCard className="flex items-center gap-4 rounded-3xl p-4 transition-all duration-300 hover:-translate-y-1 hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/10">
+                  <img
+                    alt={item.name}
+                    className="h-16 w-16 rounded-2xl bg-sky-100 object-contain p-2 dark:bg-sky-400/10"
+                    src={item.imageUrl}
+                  />
+                  <div>
+                    <p className="font-mono text-xs text-muted-foreground">
+                      #{String(item.id).padStart(3, "0")}
+                    </p>
+                    <p className="mt-1 font-semibold">{item.name}</p>
+                  </div>
+                </AppCard>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </AppDialog>
   );

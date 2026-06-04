@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 
-import { ShellHeader } from "./ShellHeader";
 import { useSessionStore, useThemeStore } from "../../stores";
+import { ShellHeader } from "./ShellHeader";
 
 export function AuthenticatedLayout() {
   const { mode, setMode } = useThemeStore();
@@ -15,7 +15,7 @@ export function AuthenticatedLayout() {
         onModeChange={setMode}
         session={session}
       />
-      <main className="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
+      <main className="mx-auto max-w-7xl px-5 pt-10 sm:px-8 sm:pt-14">
         <Outlet />
       </main>
     </div>

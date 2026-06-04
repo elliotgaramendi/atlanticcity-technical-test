@@ -3,7 +3,14 @@ import { BadgeInfo, MonitorDot } from "lucide-react";
 
 const app = workspaceApps.detail;
 
-export function App() {
+export interface PokemonDetailRemoteProps {
+  pokemonId?: number;
+  pokemonName?: string;
+}
+
+export function App({ pokemonId, pokemonName }: PokemonDetailRemoteProps = {}) {
+  const displayName = pokemonName ?? app.name;
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50">
       <section className="mx-auto flex min-h-screen max-w-5xl flex-col justify-center px-6 py-12">
@@ -14,8 +21,13 @@ export function App() {
           Microfrontend standalone
         </p>
         <h1 className="max-w-3xl text-4xl font-bold leading-tight sm:text-6xl">
-          {app.name}
+          {displayName}
         </h1>
+        {pokemonId ? (
+          <p className="mt-3 font-mono text-sm uppercase tracking-[0.24em] text-cyan-300">
+            National ID #{String(pokemonId).padStart(3, "0")}
+          </p>
+        ) : null}
         <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-slate-300">
           <span className="inline-flex items-center gap-2 rounded-md border border-slate-700 px-3 py-2">
             <MonitorDot aria-hidden="true" size={16} />

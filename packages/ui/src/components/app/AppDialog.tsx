@@ -12,6 +12,7 @@ import { cn } from "../../lib/utils";
 export interface AppDialogProps {
   children: ReactNode;
   description?: string;
+  eyebrow?: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   showHeader?: boolean;
@@ -23,6 +24,7 @@ export interface AppDialogProps {
 export function AppDialog({
   children,
   description,
+  eyebrow = "Busqueda avanzada",
   open,
   onOpenChange,
   showHeader = true,
@@ -44,7 +46,7 @@ export function AppDialog({
         {showHeader ? (
           <DialogHeader>
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-cyan-500">
-              Busqueda avanzada
+              {eyebrow}
             </p>
             <DialogTitle className="text-2xl font-bold">{title}</DialogTitle>
             {description ? (
