@@ -9,8 +9,8 @@ export function shouldShowLastVisitedToast(
   if (!lastVisited) return false;
 
   return (
-    sessionRepository.get()?.dismissedLastVisitedToastAt !==
-    lastVisited.visitedAt
+    sessionRepository.get()?.dismissedLastVisitedVisitId !==
+    lastVisited.visitId
   );
 }
 
@@ -21,9 +21,13 @@ export function dismissLastVisitedToast(
   const lastVisited = getLastVisitedPokemon(historyRepository);
   if (!lastVisited) return;
 
+  const session = sessionRepository.get();
+
   sessionRepository.save({
-    id: sessionRepository.get()?.id ?? "anonymous",
+    ...session,
+    id: session?.id ?? "anonymous",
+    dismissedLastVisitedVisitId: lastVisited.visitId,
     lastVisitedPokemonName: lastVisited.name,
-    dismissedLastVisitedToastAt: lastVisited.visitedAt
+    lastVisitedVisitId: lastVisited.visitId
   });
 }

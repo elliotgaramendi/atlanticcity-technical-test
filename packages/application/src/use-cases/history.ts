@@ -12,7 +12,8 @@ export function saveVisitedPokemon(
     imageUrl: pokemon.imageUrl,
     name: pokemon.name,
     visitedAt,
-    visitCount: 1
+    visitCount: 1,
+    visitId: createVisitId()
   };
 
   const savedItem = repository.save(item);
@@ -36,4 +37,12 @@ export function getLastVisitedPokemon(
   repository: HistoryRepository
 ): PokemonHistoryItem | null {
   return repository.getAll()[0] ?? null;
+}
+
+function createVisitId(): string {
+  if (globalThis.crypto?.randomUUID) {
+    return globalThis.crypto.randomUUID();
+  }
+
+  return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }

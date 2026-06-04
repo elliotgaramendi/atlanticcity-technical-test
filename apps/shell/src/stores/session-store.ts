@@ -14,6 +14,7 @@ interface SessionStore {
   login: (credentials: LoginCredentials) => boolean;
   logout: () => void;
   session: UserSession | null;
+  updateSession: (session: UserSession) => void;
 }
 
 export const useSessionStore = create<SessionStore>()(
@@ -37,7 +38,8 @@ export const useSessionStore = create<SessionStore>()(
         return true;
       },
       logout: () => set({ session: null }),
-      session: null
+      session: null,
+      updateSession: (session) => set({ session })
     }),
     {
       name: "atlanticcity-session"

@@ -34,13 +34,15 @@ export interface PokemonHistoryItem {
   name: PokemonName;
   visitedAt: string;
   visitCount: number;
+  visitId: string;
 }
 
 export interface UserSession {
   authenticatedAt?: string;
-  dismissedLastVisitedToastAt?: string;
+  dismissedLastVisitedVisitId?: string;
   displayName?: string;
   email?: string;
   id: string;
   lastVisitedPokemonName?: PokemonName;
+  lastVisitedVisitId?: string;
 }

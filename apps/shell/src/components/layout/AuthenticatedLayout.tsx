@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 
+import { LastVisitedToastGate } from "../../features/history/LastVisitedToastGate";
 import { useSessionStore, useThemeStore } from "../../stores";
 import { ShellHeader } from "./ShellHeader";
 
@@ -15,6 +16,7 @@ export function AuthenticatedLayout() {
         onModeChange={setMode}
         session={session}
       />
+      <LastVisitedToastGate />
       <main className="mx-auto max-w-7xl px-5 pt-10 sm:px-8 sm:pt-14">
         <Outlet />
       </main>
