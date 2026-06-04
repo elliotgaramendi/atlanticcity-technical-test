@@ -32,7 +32,7 @@ export function subscribeToHistoryCleared(
   return subscribe(historyClearedEventName, handler);
 }
 
-const pokemonVisitedEventName = "atlanticcity:pokemon-visited";
+const pokemonVisitedEventName = "pokemon:visited";
 const historyClearedEventName = "atlanticcity:history-cleared";
 const fallbackTarget = new EventTarget();
 const eventTarget = globalThis.window ?? fallbackTarget;

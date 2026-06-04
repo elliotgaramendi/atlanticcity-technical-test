@@ -3,7 +3,7 @@ import type { PokemonHistoryItem, UserSession } from "@atlanticcity/domain";
 export interface HistoryRepository {
   clear(): void;
   getAll(): PokemonHistoryItem[];
-  save(item: PokemonHistoryItem): void;
+  save(item: PokemonHistoryItem): PokemonHistoryItem;
 }
 
 export interface SessionRepository {

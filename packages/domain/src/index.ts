@@ -33,6 +33,7 @@ export interface PokemonHistoryItem {
   imageUrl: string;
   name: PokemonName;
   visitedAt: string;
+  visitCount: number;
 }
 
 export interface UserSession {

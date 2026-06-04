@@ -11,13 +11,14 @@ export function saveVisitedPokemon(
     id: pokemon.id,
     imageUrl: pokemon.imageUrl,
     name: pokemon.name,
-    visitedAt
+    visitedAt,
+    visitCount: 1
   };
 
-  repository.save(item);
-  emitPokemonVisited(item);
+  const savedItem = repository.save(item);
+  emitPokemonVisited(savedItem);
 
-  return item;
+  return savedItem;
 }
 
 export function getVisitedHistory(
