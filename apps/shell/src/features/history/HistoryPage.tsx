@@ -1,3 +1,5 @@
+import { clearHistory } from "@atlanticcity/application";
+import { localStorageHistoryRepository } from "@atlanticcity/infrastructure";
 import { AppButton, AppCard } from "@atlanticcity/ui";
 import { Trash2, History as HistoryIcon } from "lucide-react";
 
@@ -22,7 +24,12 @@ export function HistoryPage() {
             Pokemon vistos recientemente.
           </p>
         </div>
-        <AppButton className="w-fit" type="button" variant="outline">
+        <AppButton
+          className="w-fit"
+          onClick={() => clearHistory(localStorageHistoryRepository)}
+          type="button"
+          variant="outline"
+        >
           <Trash2 aria-hidden="true" size={16} />
           Limpiar historial
         </AppButton>

@@ -1,9 +1,12 @@
 import { shellRemoteConfigs } from "@atlanticcity/config";
-import type { ComponentType } from "react";
+
+export interface ShellRemoteModule {
+  default: unknown;
+}
 
 export interface ShellRemote {
   id: "pokemon-detail" | "pokemon-history";
-  load: () => Promise<{ default: ComponentType }>;
+  load: () => Promise<ShellRemoteModule>;
   name: string;
   remoteUrl: string;
 }

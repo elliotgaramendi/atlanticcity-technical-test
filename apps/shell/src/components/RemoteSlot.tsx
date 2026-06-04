@@ -24,7 +24,7 @@ export function RemoteSlot({ remote }: RemoteSlotProps) {
       .then(() => remote.load())
       .then((module) => {
         if (isMounted) {
-          setStatus({ Component: module.default, type: "ready" });
+          setStatus({ Component: module.default as ComponentType, type: "ready" });
         }
       })
       .catch((error: unknown) => {

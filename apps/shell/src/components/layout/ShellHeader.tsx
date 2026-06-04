@@ -12,7 +12,7 @@ import {
   ThemeToggle,
   showAppToast
 } from "@atlanticcity/ui";
-import { LogOut, User } from "lucide-react";
+import { History, LogOut, Menu, Search, User } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 interface ShellHeaderProps {
@@ -51,11 +51,47 @@ export function ShellHeader({
         </nav>
 
         <div className="flex items-center gap-2">
+          <MobileNavMenu />
           <ThemeToggle mode={mode} onModeChange={onModeChange} />
           <UserMenu onLogout={onLogout} session={session} />
         </div>
       </div>
     </header>
+  );
+}
+
+function MobileNavMenu() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <AppButton
+          aria-label="Menu de navegacion"
+          className="h-11 w-11 px-0 sm:hidden"
+          variant="outline"
+        >
+          <Menu aria-hidden="true" size={18} />
+        </AppButton>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        align="end"
+        className="w-52 rounded-2xl border-sky-200/70 bg-white/95 p-2 shadow-xl shadow-sky-950/10 dark:border-sky-400/15 dark:bg-slate-950/95"
+      >
+        <DropdownMenuLabel>Navegacion</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild className="rounded-xl">
+          <NavLink to="/">
+            <Search aria-hidden="true" size={16} />
+            Buscar
+          </NavLink>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild className="rounded-xl">
+          <NavLink to="/history">
+            <History aria-hidden="true" size={16} />
+            Historial
+          </NavLink>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
 

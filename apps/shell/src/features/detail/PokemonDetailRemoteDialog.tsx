@@ -1,5 +1,5 @@
 import type { Pokemon } from "@atlanticcity/domain";
-import { AppDialog, ErrorState, LoadingState } from "@atlanticcity/ui";
+import { AppDialog, ErrorState, LoadingState, showAppToast } from "@atlanticcity/ui";
 import type { ComponentType } from "react";
 import { useEffect, useState } from "react";
 
@@ -70,7 +70,17 @@ export function PokemonDetailRemoteDialog({
     >
       <div className="min-h-96">
         {status.type === "ready" && pokemon && status.pokemonId === pokemon.id ? (
-          <status.Component pokemonId={pokemon.id} pokemonName={pokemon.name} />
+          <status.Component
+            pokemonName={pokemon.name}
+            onVisited={(item) =>
+              showAppToast.success(
+                "Visita registrada",
+                `${item.name} · ${item.visitCount} visita${
+                  item.visitCount === 1 ? "" : "s"
+                }`
+              )
+            }
+          />
         ) : status.type === "error" &&
           pokemon &&
           status.pokemonId === pokemon.id ? (
