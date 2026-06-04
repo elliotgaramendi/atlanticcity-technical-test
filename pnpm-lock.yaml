@@ -102,12 +102,27 @@ importers:
 
   apps/pokemon-detail:
     dependencies:
+      '@atlanticcity/application':
+        specifier: workspace:*
+        version: link:../../packages/application
       '@atlanticcity/config':
         specifier: workspace:*
         version: link:../../packages/config
+      '@atlanticcity/domain':
+        specifier: workspace:*
+        version: link:../../packages/domain
+      '@atlanticcity/infrastructure':
+        specifier: workspace:*
+        version: link:../../packages/infrastructure
       '@atlanticcity/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@atlanticcity/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
+      '@tanstack/react-query':
+        specifier: ^5.101.0
+        version: 5.101.0(react@19.2.7)
       lucide-react:
         specifier: latest
         version: 1.17.0(react@19.2.7)
@@ -120,12 +135,24 @@ importers:
 
   apps/pokemon-history:
     dependencies:
+      '@atlanticcity/application':
+        specifier: workspace:*
+        version: link:../../packages/application
       '@atlanticcity/config':
         specifier: workspace:*
         version: link:../../packages/config
+      '@atlanticcity/domain':
+        specifier: workspace:*
+        version: link:../../packages/domain
+      '@atlanticcity/infrastructure':
+        specifier: workspace:*
+        version: link:../../packages/infrastructure
       '@atlanticcity/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@atlanticcity/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       lucide-react:
         specifier: latest
         version: 1.17.0(react@19.2.7)
@@ -138,6 +165,9 @@ importers:
 
   apps/shell:
     dependencies:
+      '@atlanticcity/application':
+        specifier: workspace:*
+        version: link:../../packages/application
       '@atlanticcity/config':
         specifier: workspace:*
         version: link:../../packages/config

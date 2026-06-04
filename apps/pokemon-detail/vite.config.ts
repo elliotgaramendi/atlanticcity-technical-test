@@ -11,7 +11,7 @@ export default defineConfig({
   envDir: "../..",
   publicDir: "../../public",
   plugins: [
-    react({ reactRefreshHost: "http://localhost:3000" }),
+    react(),
     babel({ presets: [reactCompilerPreset({ compilationMode: "annotation" })] }),
     ...federation({
       name: "pokemonDetail",

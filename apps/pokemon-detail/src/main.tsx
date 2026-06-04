@@ -1,11 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import { App } from "./App";
+import { DetailProviders } from "./components/DetailProviders";
+import { StandaloneDetailPage } from "./components/StandaloneDetailPage";
 import "./styles.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <DetailProviders>
+      <StandaloneDetailPage />
+    </DetailProviders>
   </React.StrictMode>
 );
