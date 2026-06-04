@@ -8,7 +8,7 @@ interface PokemonTypeBadgesProps {
 
 export function PokemonTypeBadges({ name, types }: PokemonTypeBadgesProps) {
   return (
-    <div className="mt-4 flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2">
       {types.map((type) => (
         <Badge
           className={cn(
@@ -17,7 +17,6 @@ export function PokemonTypeBadges({ name, types }: PokemonTypeBadgesProps) {
           )}
           key={`${name}-${type.name}`}
         >
-          <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-white/80" />
           {type.name}
         </Badge>
       ))}

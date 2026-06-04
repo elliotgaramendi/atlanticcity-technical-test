@@ -49,27 +49,23 @@ export function LoginPage() {
   }
 
   return (
-    <main className="relative min-h-dvh overflow-hidden bg-background text-foreground">
+    <main className="relative flex items-center min-h-dvh overflow-hidden bg-background text-foreground">
       <div
         aria-hidden="true"
         className="absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(14,165,233,0.18),transparent_28%),radial-gradient(circle_at_20%_72%,rgba(59,130,246,0.12),transparent_30%)] dark:bg-[radial-gradient(circle_at_72%_48%,rgba(14,165,233,0.22),transparent_30%),radial-gradient(circle_at_16%_72%,rgba(37,99,235,0.14),transparent_30%)]"
       />
-      <div className="absolute right-5 top-5 z-10">
+      <div className="absolute z-50 right-5 top-5">
         <ThemeToggle mode={mode} onModeChange={setMode} />
       </div>
 
-      <section className="relative z-10 mx-auto grid min-h-dvh w-full max-w-7xl items-center gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_0.86fr]">
-        <div className="order-2 lg:order-1">
-          <LoginHero />
-        </div>
-        <div className="order-1 lg:order-2">
-          <LoginCard
-            errors={errors}
-            isSubmitting={isSubmitting}
-            onSubmit={handleSubmit(handleLogin)}
-            register={register}
-          />
-        </div>
+      <section className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-[1fr_0.86fr]">
+        <LoginHero />
+        <LoginCard
+          errors={errors}
+          isSubmitting={isSubmitting}
+          onSubmit={handleSubmit(handleLogin)}
+          register={register}
+        />
       </section>
     </main>
   );

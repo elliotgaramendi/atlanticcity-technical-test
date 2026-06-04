@@ -39,7 +39,7 @@ export function ShellHeader({
           />
           <div>
             <p className="text-sm font-bold leading-none">Pokedex</p>
-            <p className="mt-1 text-[0.65rem] uppercase tracking-[0.32em] text-muted-foreground">
+            <p className="mt-1 text-[0.65rem] uppercase tracking-widest text-muted-foreground">
               Atlantic City
             </p>
           </div>
@@ -51,9 +51,9 @@ export function ShellHeader({
         </nav>
 
         <div className="flex items-center gap-2">
-          <MobileNavMenu />
           <ThemeToggle mode={mode} onModeChange={onModeChange} />
           <UserMenu onLogout={onLogout} session={session} />
+          <MobileNavMenu />
         </div>
       </div>
     </header>
@@ -135,7 +135,7 @@ function UserMenu({
       <DropdownMenuTrigger asChild>
         <AppButton
           aria-label="Menu de usuario"
-          className="h-11 gap-2 px-2 pr-3"
+          className="h-11 gap-2 px-2"
           variant="outline"
         >
           <Avatar className="h-8 w-8 border border-sky-300/60 bg-sky-100 dark:border-sky-400/20 dark:bg-sky-950">

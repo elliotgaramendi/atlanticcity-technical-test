@@ -26,8 +26,6 @@ export function LoginCard({
       className="mx-auto w-full max-w-md p-8 shadow-2xl shadow-sky-500/10"
       tone="elevated"
     >
-      <LoginCardStatus />
-
       <h2 className="text-2xl font-bold">Bienvenido, explorador</h2>
       <p className="mt-2 text-sm text-muted-foreground">
         Ingresa tus credenciales para continuar.
@@ -83,19 +81,5 @@ export function LoginCard({
         Acceso de demostracion · cualquier cambio invalido sera rechazado
       </p>
     </AppCard>
-  );
-}
-
-function LoginCardStatus() {
-  return (
-    <div className="mb-8 flex items-center justify-between gap-3">
-      <span className="rounded-full border border-sky-200 px-3 py-1 font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground dark:border-sky-400/20">
-        AC · ID-0451
-      </span>
-      <span className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-[0.28em] text-cyan-500">
-        <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
-        Online
-      </span>
-    </div>
   );
 }

@@ -1,6 +1,3 @@
-import { AppCard } from "@atlanticcity/ui";
-import { KeyRound, ShieldCheck } from "lucide-react";
-import type { ReactNode } from "react";
 
 export function LoginHero() {
   return (
@@ -12,23 +9,10 @@ export function LoginHero() {
           exploracion Pokemon
         </span>
       </h1>
-      <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">
+      <p className="hidden mt-5 max-w-xl text-base leading-7 text-muted-foreground md:block">
         Inicia sesion con tus credenciales de explorador para acceder a la base
         de datos visual de criaturas, estadisticas y reportes de campo.
       </p>
-
-      <div className="mt-10 grid gap-3">
-        <LoginBenefit
-          icon={<ShieldCheck aria-hidden="true" size={18} />}
-          text="Cada sesion queda registrada en tu historial."
-          title="Credencial verificada"
-        />
-        <LoginBenefit
-          icon={<KeyRound aria-hidden="true" size={18} />}
-          text="Comunicacion segura con la base de datos PokeAPI."
-          title="Acceso cifrado"
-        />
-      </div>
     </div>
   );
 }
@@ -43,32 +27,10 @@ function BrandMark() {
       />
       <div>
         <p className="font-bold leading-none">Pokedex</p>
-        <p className="mt-1 text-xs uppercase tracking-[0.34em] text-muted-foreground">
+        <p className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">
           Atlantic City
         </p>
       </div>
     </div>
-  );
-}
-
-function LoginBenefit({
-  icon,
-  text,
-  title
-}: {
-  icon: ReactNode;
-  text: string;
-  title: string;
-}) {
-  return (
-    <AppCard className="flex items-center gap-4 rounded-2xl p-4" tone="glass">
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-sky-100 text-sky-600 dark:bg-sky-500/15 dark:text-cyan-300">
-        {icon}
-      </span>
-      <span>
-        <span className="block font-semibold">{title}</span>
-        <span className="block text-sm text-muted-foreground">{text}</span>
-      </span>
-    </AppCard>
   );
 }

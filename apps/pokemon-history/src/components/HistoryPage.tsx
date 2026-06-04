@@ -21,9 +21,9 @@ export function HistoryPage({ compact = false }: HistoryPageProps) {
   };
 
   return (
-    <section className="min-h-full space-y-6 bg-background text-foreground">
+    <section className="min-h-full space-y-6 bg-background text-foreground p-4 rounded-3xl">
       {!compact ? (
-        <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-start ">
+        <div className="flex flex-col items-start justify-between mb-5 gap-5 sm:flex-row">
           <HistoryHeading />
           <ClearHistoryButton disabled={!canClear} onClick={handleClearHistory} />
         </div>
@@ -54,7 +54,7 @@ export function HistoryPage({ compact = false }: HistoryPageProps) {
 function HistoryHeading({ compact = false }: { compact?: boolean }) {
   return (
     <div>
-      <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.34em] text-cyan-500">
+      <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-cyan-500">
         <HistoryIcon aria-hidden="true" size={16} />
         Bitacora
       </p>

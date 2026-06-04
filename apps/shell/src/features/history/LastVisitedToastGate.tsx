@@ -24,9 +24,8 @@ export function LastVisitedToastGate() {
     shownVisitIdRef.current = routeVisitKey;
 
     showAppToast.lastVisited(
-      "Ultimo Pokemon visitado",
-      `${lastVisited.name} ${formatPokemonId(lastVisited.id)} · ${
-        lastVisited.visitCount
+      "Último Pokemon visitado",
+      `${lastVisited.name} ${formatPokemonId(lastVisited.id)} · ${lastVisited.visitCount
       } visita${lastVisited.visitCount === 1 ? "" : "s"}`,
       lastVisited.imageUrl
     );

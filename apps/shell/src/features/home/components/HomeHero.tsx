@@ -21,7 +21,7 @@ export function HomeHero({ totalPokemon }: { totalPokemon: number }) {
       <div className="grid grid-cols-3 gap-3">
         <MetricCard label="Registros" value={String(totalPokemon).padStart(2, "0")} />
         <MetricCard label="Tipos" value="08" />
-        <MetricCard label="Region" value="Kanto" />
+        <MetricCard label="Region" value="Pokémon" />
       </div>
     </section>
   );

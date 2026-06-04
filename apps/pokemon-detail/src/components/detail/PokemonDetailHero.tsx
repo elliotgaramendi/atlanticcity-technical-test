@@ -1,6 +1,6 @@
 import type { PokemonDetail } from "@atlanticcity/domain";
-import { formatPokemonId } from "@atlanticcity/utils";
 import { AppCard } from "@atlanticcity/ui";
+import { formatPokemonId } from "@atlanticcity/utils";
 import { Dumbbell, Ruler, Sparkles, Zap } from "lucide-react";
 
 import { PokemonMetricCard } from "./PokemonMetricCard";
@@ -26,20 +26,22 @@ export function PokemonDetailHero({ pokemon }: PokemonDetailHeroProps) {
           />
         </div>
 
-        <div className="flex flex-col justify-center">
-          <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.34em] text-cyan-500">
-            <Sparkles aria-hidden="true" size={16} />
-            Ficha de investigacion
-          </p>
-          <p className="font-mono text-sm text-muted-foreground">
-            National ID {formatPokemonId(pokemon.id)}
-          </p>
-          <h1 className="mt-2 text-4xl font-bold capitalize tracking-tight sm:text-6xl">
-            {pokemon.name}
-          </h1>
+        <div className="flex flex-col justify-center gap-3">
+          <div className="flex flex-col gap-3 mt-2">
+            <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-cyan-500">
+              <Sparkles aria-hidden="true" size={16} />
+              Ficha de investigacion
+            </p>
+            <p className="font-mono text-sm text-muted-foreground">
+              National ID {formatPokemonId(pokemon.id)}
+            </p>
+            <h1 className="text-4xl font-bold capitalize tracking-tight sm:text-6xl">
+              {pokemon.name}
+            </h1>
+          </div>
           <PokemonTypeBadges name={pokemon.name} types={pokemon.types} />
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          <div className="grid gap-3 grid-cols-3">
             <PokemonMetricCard
               icon={Ruler}
               label="Altura"

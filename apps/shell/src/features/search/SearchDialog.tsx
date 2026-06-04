@@ -112,7 +112,7 @@ export function SearchDialog({
     >
       <div className="mx-auto flex min-h-[calc(100dvh-3rem)] w-full max-w-5xl flex-col pt-8">
         <div className="mb-7 flex items-center justify-between gap-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.42em] text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             Busqueda avanzada
           </p>
           <AppButton

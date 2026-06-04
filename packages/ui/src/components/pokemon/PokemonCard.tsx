@@ -1,6 +1,6 @@
 import type { PokemonType } from "@atlanticcity/domain";
-import { Badge } from "../ui";
 import { cn } from "../../lib/utils";
+import { Badge } from "../ui";
 import { getPokemonTypeStyle } from "./pokemon-type-styles";
 
 export interface PokemonCardProps {
@@ -45,7 +45,6 @@ export function PokemonCard({
       <div className="relative z-10 flex w-full flex-col">
         <div className="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-sky-100/45">
           <span>#{String(id).padStart(3, "0")}</span>
-          <span>AC-PDX</span>
         </div>
         <div
           className={cn(

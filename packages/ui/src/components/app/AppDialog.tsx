@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { cn } from "../../lib/utils";
 import {
   Dialog,
   DialogContent,
@@ -7,7 +8,6 @@ import {
   DialogTitle,
   DialogTrigger
 } from "../ui";
-import { cn } from "../../lib/utils";
 
 export interface AppDialogProps {
   children: ReactNode;
@@ -45,15 +45,10 @@ export function AppDialog({
       >
         {showHeader ? (
           <DialogHeader>
-            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-cyan-500">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-500">
               {eyebrow}
             </p>
             <DialogTitle className="text-2xl font-bold">{title}</DialogTitle>
-            {description ? (
-              <DialogDescription className="text-slate-600 dark:text-sky-100/70">
-                {description}
-              </DialogDescription>
-            ) : null}
           </DialogHeader>
         ) : (
           <DialogHeader className="sr-only">

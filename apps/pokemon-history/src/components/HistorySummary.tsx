@@ -24,7 +24,7 @@ export function HistorySummary({ compact = false, items }: HistorySummaryProps) 
         </p>
         <p className="mt-3 text-4xl font-bold">{String(items.length).padStart(2, "0")}</p>
         <p className="text-sm text-muted-foreground">Pokemon en bitacora</p>
-        <div className="mt-5 space-y-3 text-sm">
+        <div className="mt-5 text-sm">
           <SummaryRow label="Total visitas" value={String(totalVisits)} />
           <SummaryRow label="Ultima visita" value={formatVisitedAt(items[0]?.visitedAt)} />
           <SummaryRow label="Mas visitado" value={mostVisited?.name ?? "-"} />
@@ -36,7 +36,7 @@ export function HistorySummary({ compact = false, items }: HistorySummaryProps) 
 
 function SummaryRow({ label, value }: { label: string; value?: string }) {
   return (
-    <div className="flex items-center justify-between gap-4 border-t border-border pt-3">
+    <div className="flex items-center justify-between gap-4 border-t border-border py-1">
       <span className="text-muted-foreground">{label}</span>
       <span className="text-right font-mono capitalize">{value ?? "-"}</span>
     </div>

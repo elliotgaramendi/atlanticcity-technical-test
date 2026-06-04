@@ -21,7 +21,7 @@ export function LoginField({
   return (
     <div className="block">
       <label
-        className="mb-2 block text-xs font-semibold uppercase tracking-[0.32em] text-muted-foreground"
+        className="mb-2 block text-xs font-semibold uppercase tracking-widest text-muted-foreground"
         htmlFor={id}
       >
         {label}
