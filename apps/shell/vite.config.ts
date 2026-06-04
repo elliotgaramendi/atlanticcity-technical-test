@@ -1,5 +1,6 @@
 import {
   federationSharedDependencies,
+  viteOptimizeDepsExclude,
   viteResolveDedupeDependencies
 } from "@atlanticcity/config";
 import { federation } from "@module-federation/vite";
@@ -49,6 +50,9 @@ export default defineConfig(({ mode }) => {
     ],
     resolve: {
       dedupe: viteResolveDedupeDependencies
+    },
+    optimizeDeps: {
+      exclude: viteOptimizeDepsExclude
     },
     server: {
       origin: "http://localhost:3000",

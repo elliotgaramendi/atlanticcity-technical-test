@@ -68,3 +68,9 @@ export const federationSharedDependencies = {
 export const viteResolveDedupeDependencies = Object.keys(
   federationSharedDependencies
 );
+
+export const viteOptimizeDepsExclude = [
+  "@module-federation/runtime",
+  "@module-federation/runtime-tools",
+  "@module-federation/vite"
+];
