@@ -56,7 +56,7 @@ export function PokemonCard({
             alt={name}
             className={cn(
               "object-contain drop-shadow-2xl transition-transform duration-300 group-hover:scale-105",
-              isCompact ? "h-24 w-24" : "h-36 w-36"
+              isCompact ? "h-32 w-32" : "h-44 w-44"
             )}
             loading="lazy"
             src={imageUrl}

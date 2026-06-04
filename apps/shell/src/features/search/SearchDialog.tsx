@@ -106,6 +106,7 @@ export function SearchDialog({
     <AppDialog
       open={open}
       onOpenChange={handleOpenChange}
+      showCloseButton={false}
       showHeader={false}
       size="fullscreen"
       title="Busqueda avanzada"

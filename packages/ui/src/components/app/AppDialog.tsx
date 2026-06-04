@@ -15,6 +15,7 @@ export interface AppDialogProps {
   eyebrow?: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  showCloseButton?: boolean;
   showHeader?: boolean;
   size?: "default" | "fullscreen";
   title: string;
@@ -27,6 +28,7 @@ export function AppDialog({
   eyebrow = "Busqueda avanzada",
   open,
   onOpenChange,
+  showCloseButton = true,
   showHeader = true,
   size = "default",
   title,
@@ -36,6 +38,7 @@ export function AppDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       {trigger ? <DialogTrigger asChild>{trigger}</DialogTrigger> : null}
       <DialogContent
+        showCloseButton={showCloseButton}
         className={cn(
           "overflow-y-auto border-sky-300/50 bg-sky-50/95 p-6 text-slate-950 shadow-2xl shadow-sky-950/20 backdrop-blur-xl duration-300 dark:border-sky-400/20 dark:bg-slate-950/95 dark:text-sky-50",
           size === "fullscreen"
