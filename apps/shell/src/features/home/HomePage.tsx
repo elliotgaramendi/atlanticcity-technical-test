@@ -46,7 +46,6 @@ export function HomePage() {
         open={isSearchOpen}
         onOpenChange={setIsSearchOpen}
         onPokemonSelect={setSelectedPokemon}
-        pokemon={allPokemon}
       />
       <PokemonDetailRemoteDialog
         open={Boolean(selectedPokemon)}

@@ -1,52 +1,111 @@
 import type { Pokemon } from "@atlanticcity/domain";
-import { AppButton, AppCard, AppDialog, AppInput, EmptyState } from "@atlanticcity/ui";
+import { AppButton, AppDialog, AppInput } from "@atlanticcity/ui";
 import { Search, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+
+import { SearchResults } from "./SearchResults";
+import { useDebouncedValue } from "./hooks/useDebouncedValue";
+import {
+  normalizeExactPokemonSearch,
+  useExactPokemonSearch
+} from "./hooks/useExactPokemonSearch";
+import { usePokemonInfiniteSearchList } from "./hooks/usePokemonInfiniteSearchList";
 
 interface SearchDialogProps {
   onOpenChange: (open: boolean) => void;
   onPokemonSelect: (pokemon: Pokemon) => void;
   open: boolean;
-  pokemon: Pokemon[];
 }
 
 export function SearchDialog({
   onOpenChange,
   onPokemonSelect,
-  open,
-  pokemon
+  open
 }: SearchDialogProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState("");
+  const normalizedQuery = normalizeExactPokemonSearch(query);
+  const debouncedQuery = useDebouncedValue(normalizedQuery, 500);
+  const isExactMode = normalizedQuery.length > 0;
+  const isWaitingForDebounce = isExactMode && normalizedQuery !== debouncedQuery;
+  const listQuery = usePokemonInfiniteSearchList(open && !isExactMode);
+  const exactQuery = useExactPokemonSearch(debouncedQuery, open && isExactMode);
 
   useEffect(() => {
     if (!open) return;
+
     window.setTimeout(() => inputRef.current?.focus(), 100);
   }, [open]);
 
-  const results = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
-    if (!normalizedQuery) return pokemon.slice(0, 2);
+  useEffect(() => {
+    const sentinel = loadMoreRef.current;
+    if (
+      !open ||
+      isExactMode ||
+      !sentinel ||
+      !listQuery.hasNextPage ||
+      listQuery.isFetchingNextPage
+    ) {
+      return;
+    }
 
-    return pokemon.filter((item) => {
-      const paddedId = String(item.id).padStart(3, "0");
-      return (
-        item.name.toLowerCase().includes(normalizedQuery) ||
-        String(item.id).includes(normalizedQuery) ||
-        paddedId.includes(normalizedQuery)
-      );
-    });
-  }, [pokemon, query]);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          void listQuery.fetchNextPage();
+        }
+      },
+      { rootMargin: "240px" }
+    );
+
+    observer.observe(sentinel);
+
+    return () => observer.disconnect();
+  }, [
+    isExactMode,
+    listQuery,
+    listQuery.fetchNextPage,
+    listQuery.hasNextPage,
+    listQuery.isFetchingNextPage,
+    open
+  ]);
+
+  const results = useMemo(() => {
+    if (isExactMode) {
+      return exactQuery.data ? [exactQuery.data] : [];
+    }
+
+    return listQuery.pokemon;
+  }, [exactQuery.data, isExactMode, listQuery.pokemon]);
+
+  const resultStatus = getResultStatus({
+    exactError: exactQuery.isError,
+    exactLoading: isWaitingForDebounce || exactQuery.isPending,
+    exactMode: isExactMode,
+    listError: listQuery.isError,
+    listLoading: listQuery.isPending,
+    notFound: exactQuery.isNotFound,
+    results
+  });
 
   function handleSelect(pokemon: Pokemon) {
     onPokemonSelect(pokemon);
-    onOpenChange(false);
+    handleOpenChange(false);
+  }
+
+  function handleOpenChange(nextOpen: boolean) {
+    if (!nextOpen) {
+      setQuery("");
+    }
+
+    onOpenChange(nextOpen);
   }
 
   return (
     <AppDialog
       open={open}
-      onOpenChange={onOpenChange}
+      onOpenChange={handleOpenChange}
       showHeader={false}
       size="fullscreen"
       title="Busqueda avanzada"
@@ -58,7 +117,7 @@ export function SearchDialog({
           </p>
           <AppButton
             className="h-10 gap-2 px-4"
-            onClick={() => onOpenChange(false)}
+            onClick={() => handleOpenChange(false)}
             type="button"
             variant="outline"
           >
@@ -77,7 +136,7 @@ export function SearchDialog({
             ref={inputRef}
             className="h-16 rounded-3xl border-sky-400 bg-white/90 pl-14 text-xl shadow-2xl shadow-sky-500/10 dark:bg-slate-950/70"
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Escribe mew, pikachu o 150"
+            placeholder="Nombre exacto: pikachu, mewtwo, charizard"
             value={query}
           />
           <span className="absolute right-5 top-1/2 hidden -translate-y-1/2 rounded-full bg-slate-100 px-2 py-1 font-mono text-xs text-muted-foreground dark:bg-slate-900 sm:inline">
@@ -86,42 +145,62 @@ export function SearchDialog({
         </div>
 
         <p className="mt-4 text-sm text-muted-foreground">
-          Escribe un nombre o numero. {results.length} resultados
+          {isExactMode
+            ? "Busqueda exacta por nombre. No se buscan fragmentos."
+            : `Explorando PokeAPI por paginas de 30. ${results.length} resultados cargados.`}
         </p>
 
-        {results.length === 0 ? (
-          <EmptyState
-            className="mt-7"
-            description="No hay coincidencias entre las categorias cargadas."
-            title="Sin resultados"
-          />
-        ) : (
-          <div className="mt-7 grid gap-4 sm:grid-cols-2">
-            {results.map((item) => (
-              <button
-                className="text-left"
-                key={item.id}
-                onClick={() => handleSelect(item)}
-                type="button"
-              >
-                <AppCard className="flex items-center gap-4 rounded-3xl p-4 transition-all duration-300 hover:-translate-y-1 hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/10">
-                  <img
-                    alt={item.name}
-                    className="h-16 w-16 rounded-2xl bg-sky-100 object-contain p-2 dark:bg-sky-400/10"
-                    src={item.imageUrl}
-                  />
-                  <div>
-                    <p className="font-mono text-xs text-muted-foreground">
-                      #{String(item.id).padStart(3, "0")}
-                    </p>
-                    <p className="mt-1 font-semibold">{item.name}</p>
-                  </div>
-                </AppCard>
-              </button>
-            ))}
-          </div>
-        )}
+        <SearchResults
+          isExactMode={isExactMode}
+          isFetchingNextPage={listQuery.isFetchingNextPage}
+          isLoading={
+            isExactMode
+              ? isWaitingForDebounce || exactQuery.isPending
+              : listQuery.isPending
+          }
+          loadMoreRef={loadMoreRef}
+          notFound={exactQuery.isNotFound}
+          onRetry={() => {
+            if (isExactMode) {
+              void exactQuery.refetch();
+            } else {
+              void listQuery.refetch();
+            }
+          }}
+          onSelect={handleSelect}
+          pokemon={results}
+          status={resultStatus}
+        />
       </div>
     </AppDialog>
   );
+}
+
+function getResultStatus({
+  exactError,
+  exactLoading,
+  exactMode,
+  listError,
+  listLoading,
+  notFound,
+  results
+}: {
+  exactError: boolean;
+  exactLoading: boolean;
+  exactMode: boolean;
+  listError: boolean;
+  listLoading: boolean;
+  notFound: boolean;
+  results: Pokemon[];
+}): "empty" | "error" | "loading" | "not-found" | "success" {
+  if (exactMode) {
+    if (exactLoading) return "loading";
+    if (notFound) return "not-found";
+    if (exactError) return "error";
+    return results.length === 0 ? "empty" : "success";
+  }
+
+  if (listLoading) return "loading";
+  if (listError) return "error";
+  return results.length === 0 ? "empty" : "success";
 }
