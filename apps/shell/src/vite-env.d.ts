@@ -16,6 +16,10 @@ declare module "pokemonDetail/App" {
 declare module "pokemonHistory/App" {
   import type { ComponentType } from "react";
 
-  export const App: ComponentType;
+  export interface PokemonHistoryRemoteProps {
+    compact?: boolean;
+  }
+
+  export const App: ComponentType<PokemonHistoryRemoteProps>;
   export default App;
 }

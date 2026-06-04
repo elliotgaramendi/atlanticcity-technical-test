@@ -12,9 +12,10 @@ type RemoteStatus =
 
 interface RemoteSlotProps {
   remote: ShellRemote;
+  remoteProps?: Record<string, unknown>;
 }
 
-export function RemoteSlot({ remote }: RemoteSlotProps) {
+export function RemoteSlot({ remote, remoteProps }: RemoteSlotProps) {
   const [status, setStatus] = useState<RemoteStatus>({ type: "loading" });
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export function RemoteSlot({ remote }: RemoteSlotProps) {
   return (
     <div className="min-h-96 [&_main]:min-h-96 [&_section]:min-h-96">
       {status.type === "ready" ? (
-        <status.Component />
+        <status.Component {...remoteProps} />
       ) : status.type === "error" ? (
         <RemoteFallback name={remote.name} />
       ) : (
