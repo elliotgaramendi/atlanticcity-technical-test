@@ -5,7 +5,12 @@ import { Clock, Repeat } from "lucide-react";
 
 import { formatVisitedAt } from "../utils/formatVisitedAt";
 
-export function HistoryList({ items }: { items: PokemonHistoryItem[] }) {
+interface HistoryListProps {
+  compact?: boolean;
+  items: PokemonHistoryItem[];
+}
+
+export function HistoryList({ compact = false, items }: HistoryListProps) {
   return (
     <div className="space-y-3">
       {items.map((item) => (
@@ -29,13 +34,15 @@ export function HistoryList({ items }: { items: PokemonHistoryItem[] }) {
                 <Repeat aria-hidden="true" className="mr-1" size={12} />
                 {item.visitCount} visita{item.visitCount === 1 ? "" : "s"}
               </Badge>
-              <Badge
-                className="border-sky-200 bg-white/60 text-slate-700 dark:border-sky-400/20 dark:bg-slate-950/60 dark:text-sky-100"
-                variant="outline"
-              >
-                <Clock aria-hidden="true" className="mr-1" size={12} />
-                {formatVisitedAt(item.visitedAt)}
-              </Badge>
+              {!compact ? (
+                <Badge
+                  className="border-sky-200 bg-white/60 text-slate-700 dark:border-sky-400/20 dark:bg-slate-950/60 dark:text-sky-100"
+                  variant="outline"
+                >
+                  <Clock aria-hidden="true" className="mr-1" size={12} />
+                  {formatVisitedAt(item.visitedAt)}
+                </Badge>
+              ) : null}
             </div>
           </div>
         </AppCard>

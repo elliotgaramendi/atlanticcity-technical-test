@@ -3,9 +3,18 @@ import { AppCard, Badge } from "@atlanticcity/ui";
 
 import { formatVisitedAt } from "../utils/formatVisitedAt";
 
-export function HistorySummary({ items }: { items: PokemonHistoryItem[] }) {
+interface HistorySummaryProps {
+  compact?: boolean;
+  items: PokemonHistoryItem[];
+}
+
+export function HistorySummary({ compact = false, items }: HistorySummaryProps) {
   const totalVisits = items.reduce((total, item) => total + item.visitCount, 0);
   const mostVisited = [...items].sort((a, b) => b.visitCount - a.visitCount)[0];
+
+  if (compact) {
+    return null;
+  }
 
   return (
     <div className="space-y-4">
