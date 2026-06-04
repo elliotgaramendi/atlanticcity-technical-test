@@ -129,12 +129,12 @@ export function SearchDialog({
         <div className="relative">
           <Search
             aria-hidden="true"
-            className="absolute left-5 top-1/2 -translate-y-1/2 text-sky-500"
-            size={22}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-sky-500 sm:left-5"
+            size={20}
           />
           <AppInput
             ref={inputRef}
-            className="h-16 rounded-3xl border-sky-400 bg-white/90 pl-14 text-xl shadow-2xl shadow-sky-500/10 dark:bg-slate-950/70"
+            className="h-14 rounded-2xl border-sky-400 bg-white/90 pl-12 text-base shadow-2xl shadow-sky-500/10 dark:bg-slate-950/70 sm:h-16 sm:rounded-3xl sm:pl-14 sm:text-xl"
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Nombre exacto: pikachu, mewtwo, charizard"
             value={query}

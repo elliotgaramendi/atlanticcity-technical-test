@@ -17,18 +17,19 @@ Esta etapa crea la base del monorepo. Module Federation esta instalado para la s
 
 ## Etapa 10
 
-La regla de "ultimo Pokemon visitado" usa un identificador por visita para evitar mostrar el toast repetidamente despues de cerrarlo.
+La regla de "ultimo Pokemon visitado" lee el primer item del historial persistente y muestra un toast al entrar a Home o History con sesion activa.
 
 - Cada visita guardada en historial genera un `visitId`.
 - El ultimo Pokemon visitado es el primer item del historial persistente.
-- Al cerrar el toast, la sesion guarda `dismissedLastVisitedVisitId`.
-- Si `lastVisited.visitId` y `dismissedLastVisitedVisitId` coinciden, el toast no vuelve a mostrarse.
-- Si hay una nueva visita, se genera otro `visitId` y el toast vuelve a ser elegible al recargar una ruta privada.
+- Al entrar a Home o History, si existe historial, se muestra el toast del ultimo visitado.
+- El boton `Cerrar` oculta el toast visible, pero no elimina el historial.
+- `/login` no monta esta regla.
 
 Checklist:
 
-- Visitar un Pokemon desde Detail y recargar Home muestra el toast.
-- Cerrar el toast y recargar de nuevo no lo vuelve a mostrar.
+- Visitar un Pokemon desde Detail y volver a Home muestra el toast.
+- Recargar Home muestra el toast si existe historial.
+- Entrar a `/history` muestra el toast si existe historial.
+- Cerrar el toast lo oculta en la pantalla actual.
 - Visitar el mismo Pokemon otra vez incrementa el contador y genera un nuevo `visitId`.
-- Recargar tras una nueva visita vuelve a mostrar el toast.
 - `/login` no muestra el toast.

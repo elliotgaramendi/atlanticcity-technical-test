@@ -1,6 +1,6 @@
 import type { PokemonHistoryItem } from "@atlanticcity/domain";
-import { formatPokemonId } from "@atlanticcity/utils";
 import { AppCard, Badge } from "@atlanticcity/ui";
+import { formatPokemonId } from "@atlanticcity/utils";
 import { Clock, Repeat } from "lucide-react";
 
 import { formatVisitedAt } from "../utils/formatVisitedAt";
@@ -19,12 +19,16 @@ export function HistoryList({ compact = false, items }: HistoryListProps) {
           key={`${item.id}-${item.visitedAt}`}
           tone="glass"
         >
-          <img
-            alt={item.name}
-            className="h-16 w-16 rounded-2xl bg-sky-100 object-contain p-2 dark:bg-sky-400/10"
-            src={item.imageUrl}
-          />
-          <div className="min-w-0 flex-1">
+          <div>
+            <img
+              alt={item.name}
+              className="h-16 w-16 rounded-2xl bg-sky-100 object-contain dark:bg-sky-400/10"
+              src={item.imageUrl}
+              width={64}
+              height={64}
+            />
+          </div>
+          <div className="flex-1">
             <p className="font-mono text-xs text-muted-foreground">
               {formatPokemonId(item.id)}
             </p>

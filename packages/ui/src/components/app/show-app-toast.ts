@@ -1,3 +1,4 @@
+import { createElement } from "react";
 import { toast } from "sonner";
 
 export const showAppToast = {
@@ -7,26 +8,18 @@ export const showAppToast = {
   info(message: string, description?: string) {
     toast(message, { description });
   },
-  lastVisited(message: string, description: string, onDismiss: () => void) {
-    let isDismissed = false;
-
-    const markDismissed = () => {
-      if (isDismissed) return;
-      isDismissed = true;
-      onDismiss();
-    };
-
-    const toastId = toast.success(message, {
-      action: {
-        label: "Cerrar",
-        onClick: () => {
-          markDismissed();
-          toast.dismiss(toastId);
-        }
-      },
+  lastVisited(message: string, description: string, imageUrl?: string) {
+    toast.success(message, {
       description,
-      duration: Infinity,
-      onDismiss: markDismissed
+      duration: 6500,
+      icon: imageUrl
+        ? createElement("img", {
+            alt: "",
+            className:
+              "h-9 w-9 rounded-xl bg-sky-100 object-contain p-1 dark:bg-sky-950",
+            src: imageUrl
+          })
+        : undefined
     });
   },
   success(message: string, description?: string) {

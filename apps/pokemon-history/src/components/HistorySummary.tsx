@@ -1,5 +1,5 @@
 import type { PokemonHistoryItem } from "@atlanticcity/domain";
-import { AppCard, Badge } from "@atlanticcity/ui";
+import { AppCard } from "@atlanticcity/ui";
 
 import { formatVisitedAt } from "../utils/formatVisitedAt";
 
@@ -30,17 +30,6 @@ export function HistorySummary({ compact = false, items }: HistorySummaryProps) 
           <SummaryRow label="Mas visitado" value={mostVisited?.name ?? "-"} />
         </div>
       </AppCard>
-
-      {mostVisited ? (
-        <AppCard className="p-5" tone="glass">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-muted-foreground">
-            Frecuencia
-          </p>
-          <Badge className="mt-4 border-0 bg-cyan-500 text-white shadow-cyan-500/30">
-            {mostVisited.name} · {mostVisited.visitCount}
-          </Badge>
-        </AppCard>
-      ) : null}
     </div>
   );
 }

@@ -55,6 +55,9 @@ export default defineConfig(({ mode }) => {
       exclude: viteOptimizeDepsExclude
     },
     server: {
+      watch: {
+        ignored: ["**/dist/**", "**/.turbo/**", "**/coverage/**"]
+      },
       origin: "http://localhost:3000",
       port: 3000,
       strictPort: true
