@@ -38,10 +38,6 @@ export function HomePage() {
         />
       ))}
 
-      <footer className="mt-14 border-t border-border py-8 text-center text-sm text-muted-foreground">
-        Atlantic City Pokedex · datos cortesia de PokeAPI
-      </footer>
-
       <SearchDialog
         open={isSearchOpen}
         onOpenChange={setIsSearchOpen}

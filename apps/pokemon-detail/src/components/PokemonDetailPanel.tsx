@@ -10,7 +10,7 @@ interface PokemonDetailPanelProps {
 
 export function PokemonDetailPanel({ pokemon }: PokemonDetailPanelProps) {
   return (
-    <article className="grid gap-5 space-y-6">
+    <article className="grid gap-5">
       <PokemonDetailHero pokemon={pokemon} />
       <div className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
         <PokemonStatsCard stats={pokemon.stats} />

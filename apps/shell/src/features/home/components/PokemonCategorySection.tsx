@@ -37,7 +37,7 @@ export function PokemonCategorySection({
 
   return (
     <section className="mt-10 scroll-mt-28" id={`category-${category.type}`}>
-      <div className="mb-5 flex items-end justify-between gap-4">
+      <div className="mb-5 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-500">
             Tipo {category.type}
@@ -70,14 +70,14 @@ export function PokemonCategorySection({
           opts={{ align: "start", dragFree: true }}
         >
           <CarouselContent>
-          {visibleItems.map((pokemon) => (
-            <CarouselItem
-              className="basis-full sm:basis-1/2 xl:basis-1/4"
-              key={`${category.type}-${pokemon.id}`}
-            >
-              <PokemonCard {...pokemon} onClick={() => onPokemonSelect(pokemon)} />
-            </CarouselItem>
-          ))}
+            {visibleItems.map((pokemon) => (
+              <CarouselItem
+                className="basis-full sm:basis-1/2 xl:basis-1/4"
+                key={`${category.type}-${pokemon.id}`}
+              >
+                <PokemonCard {...pokemon} onClick={() => onPokemonSelect(pokemon)} />
+              </CarouselItem>
+            ))}
           </CarouselContent>
           <CarouselPrevious className="left-2 hidden border-sky-300/40 bg-white/90 text-sky-700 shadow-lg shadow-sky-900/10 dark:border-sky-400/20 dark:bg-slate-950/90 dark:text-sky-100 sm:flex" />
           <CarouselNext className="right-2 hidden border-sky-300/40 bg-white/90 text-sky-700 shadow-lg shadow-sky-900/10 dark:border-sky-400/20 dark:bg-slate-950/90 dark:text-sky-100 sm:flex" />

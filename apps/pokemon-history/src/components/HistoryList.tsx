@@ -28,7 +28,7 @@ export function HistoryList({ compact = false, items }: HistoryListProps) {
               height={64}
             />
           </div>
-          <div className="flex-1">
+          <div className="min-w-0 flex-1">
             <p className="font-mono text-xs text-muted-foreground">
               {formatPokemonId(item.id)}
             </p>

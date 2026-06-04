@@ -20,6 +20,9 @@ export function AuthenticatedLayout() {
       <main className="mx-auto max-w-7xl px-5 pt-10 sm:px-8 sm:pt-14">
         <Outlet />
       </main>
+      <footer className="mt-14 border-t border-border py-8 text-center text-sm text-muted-foreground">
+        Atlantic City Pokedex · datos cortesia de PokeAPI
+      </footer>
     </div>
   );
 }
