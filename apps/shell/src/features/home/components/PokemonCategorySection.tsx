@@ -1,5 +1,15 @@
 import type { Pokemon } from "@atlanticcity/domain";
-import { EmptyState, ErrorState, LoadingState, PokemonCard } from "@atlanticcity/ui";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  EmptyState,
+  ErrorState,
+  LoadingState,
+  PokemonCard
+} from "@atlanticcity/ui";
 
 import type { PokemonCategory } from "../hooks/usePokemonCategories";
 
@@ -26,7 +36,7 @@ export function PokemonCategorySection({
   });
 
   return (
-    <section className="mt-10">
+    <section className="mt-10 scroll-mt-28" id={`category-${category.type}`}>
       <div className="mb-5 flex items-end justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-500">
@@ -55,15 +65,23 @@ export function PokemonCategorySection({
           title="Sin coincidencias locales"
         />
       ) : (
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <Carousel
+          className="relative"
+          opts={{ align: "start", dragFree: true }}
+        >
+          <CarouselContent>
           {visibleItems.map((pokemon) => (
-            <PokemonCard
+            <CarouselItem
+              className="basis-full sm:basis-1/2 xl:basis-1/4"
               key={`${category.type}-${pokemon.id}`}
-              {...pokemon}
-              onClick={() => onPokemonSelect(pokemon)}
-            />
+            >
+              <PokemonCard {...pokemon} onClick={() => onPokemonSelect(pokemon)} />
+            </CarouselItem>
           ))}
-        </div>
+          </CarouselContent>
+          <CarouselPrevious className="left-2 hidden border-sky-300/40 bg-white/90 text-sky-700 shadow-lg shadow-sky-900/10 dark:border-sky-400/20 dark:bg-slate-950/90 dark:text-sky-100 sm:flex" />
+          <CarouselNext className="right-2 hidden border-sky-300/40 bg-white/90 text-sky-700 shadow-lg shadow-sky-900/10 dark:border-sky-400/20 dark:bg-slate-950/90 dark:text-sky-100 sm:flex" />
+        </Carousel>
       )}
     </section>
   );

@@ -1,15 +1,11 @@
+import {
+  federationSharedDependencies,
+  viteResolveDedupeDependencies
+} from "@atlanticcity/config";
 import { federation } from "@module-federation/vite";
 import babel from "@rolldown/plugin-babel";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-
-const shared = {
-  react: { singleton: true },
-  "react/compiler-runtime": { singleton: true },
-  "react-dom": { singleton: true },
-  "react-router-dom": { singleton: true },
-  "@tanstack/react-query": { singleton: true }
-};
 
 export default defineConfig({
   envDir: "../..",
@@ -24,9 +20,12 @@ export default defineConfig({
       exposes: {
         "./App": "./src/App.tsx"
       },
-      shared
+      shared: federationSharedDependencies
     })
   ],
+  resolve: {
+    dedupe: viteResolveDedupeDependencies
+  },
   server: {
     origin: "http://localhost:3002",
     port: 3002,

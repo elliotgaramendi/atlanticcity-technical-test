@@ -1,5 +1,6 @@
 import { AppButton, AppCard } from "@atlanticcity/ui";
-import { Lock, User } from "lucide-react";
+import { Eye, EyeOff, Lock, User } from "lucide-react";
+import { useState } from "react";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 
 import { LoginField } from "./LoginField";
@@ -18,6 +19,8 @@ export function LoginCard({
   onSubmit,
   register
 }: LoginCardProps) {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <AppCard
       className="mx-auto w-full max-w-md p-8 shadow-2xl shadow-sky-500/10"
@@ -47,10 +50,28 @@ export function LoginCard({
           id="login-password"
           inputProps={{
             autoComplete: "current-password",
-            type: "password",
+            type: showPassword ? "text" : "password",
             ...register("password")
           }}
           label="Contrasena"
+          rightAdornment={
+            <AppButton
+              aria-label={
+                showPassword ? "Ocultar contrasena" : "Mostrar contrasena"
+              }
+              className="h-9 w-9 p-0"
+              onClick={() => setShowPassword((current) => !current)}
+              size="icon"
+              type="button"
+              variant="ghost"
+            >
+              {showPassword ? (
+                <EyeOff aria-hidden="true" size={16} />
+              ) : (
+                <Eye aria-hidden="true" size={16} />
+              )}
+            </AppButton>
+          }
         />
 
         <AppButton className="h-12 w-full" disabled={isSubmitting} type="submit">

@@ -44,7 +44,7 @@ export function LoginPage() {
       return;
     }
 
-    showAppToast.success("Sesion iniciada", "Bienvenido al Pokedex Lab.");
+    showAppToast.success("Sesion iniciada", "Bienvenido al Pokedex.");
     navigate("/", { replace: true });
   }
 
@@ -59,13 +59,17 @@ export function LoginPage() {
       </div>
 
       <section className="relative z-10 mx-auto grid min-h-dvh w-full max-w-7xl items-center gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_0.86fr]">
-        <LoginHero />
-        <LoginCard
-          errors={errors}
-          isSubmitting={isSubmitting}
-          onSubmit={handleSubmit(handleLogin)}
-          register={register}
-        />
+        <div className="order-2 lg:order-1">
+          <LoginHero />
+        </div>
+        <div className="order-1 lg:order-2">
+          <LoginCard
+            errors={errors}
+            isSubmitting={isSubmitting}
+            onSubmit={handleSubmit(handleLogin)}
+            register={register}
+          />
+        </div>
       </section>
     </main>
   );

@@ -7,6 +7,7 @@ interface LoginFieldProps {
   id: string;
   inputProps: React.ComponentProps<typeof AppInput>;
   label: string;
+  rightAdornment?: ReactNode;
 }
 
 export function LoginField({
@@ -14,7 +15,8 @@ export function LoginField({
   icon,
   id,
   inputProps,
-  label
+  label,
+  rightAdornment
 }: LoginFieldProps) {
   return (
     <div className="block">
@@ -28,7 +30,16 @@ export function LoginField({
         <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground">
           {icon}
         </span>
-        <AppInput className="pl-11" id={id} {...inputProps} />
+        <AppInput
+          className={rightAdornment ? "pl-11 pr-12" : "pl-11"}
+          id={id}
+          {...inputProps}
+        />
+        {rightAdornment ? (
+          <span className="absolute right-2 top-1/2 -translate-y-1/2">
+            {rightAdornment}
+          </span>
+        ) : null}
       </span>
       {error ? (
         <span className="mt-2 block text-sm text-rose-500">{error}</span>

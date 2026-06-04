@@ -56,3 +56,15 @@ export const shellRemoteConfigs = [
     remoteUrl: remoteUrls.pokemonHistory
   }
 ] satisfies ShellRemoteConfig[];
+
+export const federationSharedDependencies = {
+  react: { singleton: true },
+  "react/compiler-runtime": { singleton: true },
+  "react-dom": { singleton: true },
+  "react-router-dom": { singleton: true },
+  "@tanstack/react-query": { singleton: true }
+} as const;
+
+export const viteResolveDedupeDependencies = Object.keys(
+  federationSharedDependencies
+);

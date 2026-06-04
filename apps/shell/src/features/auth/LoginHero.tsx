@@ -42,9 +42,9 @@ function BrandMark() {
         src="/pokemon-icon.svg"
       />
       <div>
-        <p className="font-bold leading-none">Atlantic City</p>
+        <p className="font-bold leading-none">Pokedex</p>
         <p className="mt-1 text-xs uppercase tracking-[0.34em] text-muted-foreground">
-          Pokedex Lab
+          Atlantic City
         </p>
       </div>
     </div>

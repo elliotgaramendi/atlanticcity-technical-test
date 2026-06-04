@@ -38,9 +38,9 @@ export function ShellHeader({
             src="/pokemon-icon.svg"
           />
           <div>
-            <p className="text-sm font-bold leading-none">Atlantic City</p>
+            <p className="text-sm font-bold leading-none">Pokedex</p>
             <p className="mt-1 text-[0.65rem] uppercase tracking-[0.32em] text-muted-foreground">
-              Pokedex
+              Atlantic City
             </p>
           </div>
         </NavLink>
@@ -86,7 +86,7 @@ function UserMenu({
 }) {
   const navigate = useNavigate();
   const label = session?.displayName ?? "Explorador";
-  const email = session?.email ?? "trainer@atlanticcity.dev";
+  const email = session?.email ?? "aketchum@atlanticcity.dev";
 
   function handleLogout() {
     onLogout();

@@ -1,6 +1,6 @@
 export const demoCredentials = {
   password: "Atlantic2026",
-  username: "ash.ketchum@atlanticcity.dev"
+  username: "aketchum@atlanticcity.dev"
 } as const;
 
 export const demoUser = {

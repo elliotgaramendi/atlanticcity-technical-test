@@ -5,6 +5,7 @@ import { PokemonDetailRemoteDialog } from "../detail/PokemonDetailRemoteDialog";
 import { SearchDialog } from "../search/SearchDialog";
 import { HomeHero } from "./components/HomeHero";
 import { HomeSearchControls } from "./components/HomeSearchControls";
+import { PokemonCategoryList } from "./components/PokemonCategoryList";
 import { PokemonCategorySection } from "./components/PokemonCategorySection";
 import { usePokemonCategories } from "./hooks/usePokemonCategories";
 
@@ -26,6 +27,7 @@ export function HomePage() {
         onQueryChange={setQuery}
         query={query}
       />
+      <PokemonCategoryList categories={categories} />
 
       {categories.map((category) => (
         <PokemonCategorySection
