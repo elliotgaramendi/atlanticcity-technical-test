@@ -43,6 +43,7 @@ Build settings:
 
 ```txt
 Base directory:
+/
 
 Build command:
 pnpm --filter @atlanticcity/pokemon-detail build
@@ -69,6 +70,7 @@ Build settings:
 
 ```txt
 Base directory:
+/
 
 Build command:
 pnpm --filter @atlanticcity/pokemon-history build
@@ -95,6 +97,7 @@ Build settings:
 
 ```txt
 Base directory:
+/
 
 Build command:
 pnpm --filter @atlanticcity/shell build
@@ -117,6 +120,19 @@ Expected app URL:
 https://atlanticcity-pokedex.netlify.app
 ```
 
+## Live URLs
+
+```txt
+Shell:
+https://atlanticcity-pokedex.netlify.app/login
+
+Pokemon Detail MFE:
+https://atlanticcity-pokemon-detail.netlify.app/
+
+Pokemon History MFE:
+https://atlanticcity-pokemon-history.netlify.app/
+```
+
 ## Local Production Check
 
 Run the full build:
@@ -133,17 +149,31 @@ pnpm dev:detail
 pnpm dev:history
 ```
 
-## SPA Redirects
+## SPA Redirects And CORS Headers
 
 The three Vite apps use the shared root `public` directory configured in
 `vite.config.ts`:
 
 ```txt
 public/_redirects
+public/_headers
 ```
 
-That file is copied into every app build output and prevents refreshes on
+`_redirects` is copied into every app build output and prevents refreshes on
 routes like `/history` from returning a 404.
+
+`_headers` is copied into every app build output and enables CORS for static
+assets. This is required because the Shell loads remote scripts from different
+Netlify origins:
+
+```txt
+/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS
+  Access-Control-Allow-Headers: *
+```
+
+Without those headers, the browser blocks `remoteEntry.js` with a CORS error.
 
 ## Manual Smoke Test
 

@@ -53,6 +53,20 @@ Instalacion:
 pnpm install
 ```
 
+Crear variables locales:
+
+```bash
+cp .env.example .env.local
+```
+
+`.env.local` esperado:
+
+```txt
+VITE_POKEMON_DETAIL_REMOTE_URL=http://localhost:3001/remoteEntry.js
+VITE_POKEMON_HISTORY_REMOTE_URL=http://localhost:3002/remoteEntry.js
+VITE_POKE_API_BASE_URL=https://pokeapi.co/api/v2
+```
+
 Levantar todo:
 
 ```bash
@@ -181,8 +195,9 @@ Dependencias compartidas singleton:
 En deploy, el Shell usa variables de entorno para apuntar a las URLs publicas:
 
 ```txt
-VITE_POKEMON_DETAIL_REMOTE_URL
-VITE_POKEMON_HISTORY_REMOTE_URL
+VITE_POKEMON_DETAIL_REMOTE_URL=https://atlanticcity-pokemon-detail.netlify.app/remoteEntry.js
+VITE_POKEMON_HISTORY_REMOTE_URL=https://atlanticcity-pokemon-history.netlify.app/remoteEntry.js
+VITE_POKE_API_BASE_URL=https://pokeapi.co/api/v2
 ```
 
 ## Funcionalidades
@@ -312,6 +327,12 @@ Cada app es estatica y puede publicarse de forma independiente.
 
 La estrategia recomendada esta documentada en [DEPLOYMENT.md](./DEPLOYMENT.md).
 
+Demo desplegada:
+
+- Shell: https://atlanticcity-pokedex.netlify.app/login
+- Pokemon Detail MFE: https://atlanticcity-pokemon-detail.netlify.app/
+- Pokemon History MFE: https://atlanticcity-pokemon-history.netlify.app/
+
 Resumen Netlify:
 
 1. Deployar `atlanticcity-pokemon-detail`.
@@ -320,6 +341,8 @@ Resumen Netlify:
 4. Deployar `atlanticcity-pokedex`.
 
 Cada build copia `public/_redirects` al `dist` para soportar refresh en rutas SPA.
+Tambien copia `public/_headers`, necesario para que Netlify permita cargar los
+`remoteEntry.js` desde el Shell sin bloqueo CORS.
 
 ## Decisiones Tecnicas
 
